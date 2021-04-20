@@ -24,7 +24,7 @@ recognition.onresult = (e) => {
     return (
 <>
 
-    <button onClick={() => {handleClick()}}>{!play ? " Voice Message" : "Stop"}</button>
+    <button onClick={() => {handleClick()}}>{!play ? "Voice Message" : "Stop"}</button>
 
 
 </>
