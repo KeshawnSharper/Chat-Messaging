@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react"
-import Channel from "./channel"
+import Channel from "./channel
 import axios from "axios"
 const Friends = ({user}) => {
 const [searchValue,setSearchValue] = useState("")
