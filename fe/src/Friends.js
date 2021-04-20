@@ -3,7 +3,10 @@ import Channel from "./channel"
 
 const Friends = props => {
 const [searchValue,setSearchValue] = useState("")
-const []
+const [friends,setFriends] = useState([])
+useEffect(() => {
+    
+},[])
 return (
     <div className="container clearfix">
   <div className="people-list" id="people-list">
