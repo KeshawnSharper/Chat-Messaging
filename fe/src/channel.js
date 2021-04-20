@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from "react"
 import firebase from 'firebase/app';
 import VoiceText from "./VoiceText"
-const Channel = ({user = null,db = null}) => {
+const Channel = () => {
     const [messages,setMessages] = useState([])
     const [message,setMessage] = useState({
         message:null,
         date:null
     })
+    let db = firebase.firestore()
     useEffect(() => {
         if (db){
             const unsubscribe = db
