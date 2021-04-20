@@ -58,10 +58,15 @@ body {
       list-style-type: none;
     }
   }
-  
-  img {
-    float: left;
+  .img-container{
+   
+    img {
+      height: 55px;
+      width:55px;
+      border-radius: 50%;
+    }
   }
+  
   
   .about {
     float: left;

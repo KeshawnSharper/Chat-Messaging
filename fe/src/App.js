@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.scss';
 import React, { useState,useEffect } from 'react';
+import GithubButton from 'react-github-login-button'
 import Button from "./button"
 // Firebase deps
 import firebase from 'firebase/app';
@@ -8,6 +9,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import Channel from './channel';
 import Friends from './Friends';
+import Facebook from './Facebook';
+import axios from 'axios';
 firebase.initializeApp({
   apiKey: "AIzaSyBcEl1L4U9GPz-EN8iws3oX8wQDr9CmC24",
     authDomain: "react-chat-f7a98.firebaseapp.com",
@@ -24,9 +27,8 @@ function App() {
   const [initializing,setInitializing] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user =>{
-      if (user){
-        setUser(user)
+    const unsubscribe = auth.onAuthStateChanged(change =>{
+      if (change){
         console.log(user)
       }
       else{
@@ -39,7 +41,7 @@ function App() {
     return unsubscribe
   },[])
   const signInWithGoogle = async() =>{
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider()
     auth.useDeviceLanguage()
     try{
       await 
@@ -47,6 +49,7 @@ function App() {
 
           res => {
             localStorage.setItem('token',res.credential.accessToken)
+            setUser(res)
           })
       
     }
@@ -62,16 +65,19 @@ function App() {
       console.log(error.message)
     }
   }
+ 
   if (initializing) return "Loading..."
+  console.log(user)
   return (
     <div>
+
       {
         user ? (
           <>
           <Button handleClick={signOut}> </Button>
           <p>Sign out </p>
           <>
-<Friends/>
+<Friends user={user}/>
 </>
           </>
         )
