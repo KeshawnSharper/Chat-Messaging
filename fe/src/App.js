@@ -27,6 +27,7 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged(user =>{
       if (user){
         setUser(user)
+        console.log(user)
       }
       else{
         setUser(null)
@@ -41,7 +42,13 @@ function App() {
     const provider = new firebase.auth.GoogleAuthProvider()
     auth.useDeviceLanguage()
     try{
-      await auth.signInWithPopup(provider)
+      await 
+        auth.signInWithPopup(provider).then(
+
+          res => {
+            localStorage.setItem('token',res.credential.accessToken)
+          })
+      
     }
     catch(err){
       console.log(err)

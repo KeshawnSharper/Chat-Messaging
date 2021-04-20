@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from "react"
 import Channel from "./channel"
-
+import axios from "axios"
 const Friends = props => {
 const [searchValue,setSearchValue] = useState("")
 const [friends,setFriends] = useState([])
 useEffect(() => {
-    
+    axios.get(`https://www.google.com/m8/feeds/contacts/ksharper@studentmba.org/full`).catch(
+        err => console.log(err)
+    )
+    setFriends()
 },[])
 return (
     <div className="container clearfix">
