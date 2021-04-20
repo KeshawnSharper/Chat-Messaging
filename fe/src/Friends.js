@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react"
-import Channel from "./channel
+import Channel from "./channel"
 
 const Friends = props => {
 const [searchValue,setSearchValue] = useState("")
