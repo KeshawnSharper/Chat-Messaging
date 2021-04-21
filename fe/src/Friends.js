@@ -12,6 +12,10 @@ useEffect(() => {
     setFriend(res.data.length > 0 ? res.data[0] : null)
 }
     )
+    axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/following`).then(res => {
+    setFriend(res.data.length > 0 ? [...friends,res.data[0]] : friends)
+}
+    )
 },[])
 const handleChange = e => {
   axios.get(`https://api.github.com/search/users?q=${e.target.value}&per_page=10`).then(res => (
@@ -49,7 +53,7 @@ return (
             ))
              :
              results.map(user => (
-              <li className="clearfix">
+              <li className="clearfix" style={{cursor:"pointer"}} onClick={() => changeFriend(user)}>
                   <div className="img-container">
               <img src={user.avatar_url} alt="avatar" />
               </div>
