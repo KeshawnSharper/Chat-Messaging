@@ -13,7 +13,7 @@ useEffect(() => {
 }
     )
     axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/following`).then(res => {
-    setFriend(res.data.length > 0 ? [...friends,res.data[0]] : friends)
+    setFriends(res.data.length > 0 ? [...friends,res.data[0]] : friends)
 }
     )
 },[])
