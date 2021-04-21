@@ -1,9 +1,17 @@
 import React from "react"
- const Button = (props) => {
-    const {handleClick} = props
-    console.log(handleClick)
+import GithubButton from 'react-github-login-button'
+ const Button = ({handleClick,user = null}) => {
     return (
-        <button onClick={handleClick}> </button>
+        <>
+        {user ? 
+        <button onClick={handleClick}> Sign Out</button>
+        :
+        <GithubButton
+        onClick={handleClick}
+/>
+    }
+        
+        </>
     )
 }
 export default Button

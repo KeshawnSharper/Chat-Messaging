@@ -74,8 +74,7 @@ function App() {
       {
         user ? (
           <>
-          <Button handleClick={signOut}> </Button>
-          <p>Sign out </p>
+          <Button handleClick={signOut} user={user}>  </Button>
           <>
 <Friends user={user}/>
 </>
@@ -83,10 +82,9 @@ function App() {
         )
         :
         (
-          <>
-          <Button handleClick={signInWithGoogle}> Sign in with Google</Button>
-        <p>Sign in with Google</p>
-        </>
+          <div className="signin-btn">
+          <Button handleClick={signInWithGoogle} user={null}> Sign in with Google</Button>
+        </div>
         )
       }
     </div>

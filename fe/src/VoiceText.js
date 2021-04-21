@@ -18,7 +18,7 @@ const VoiceText = ({setMessage,message}) => {
     }
 recognition.onresult = (e) => {
     setMessage({
-        message:message +" " + e.results[e.resultIndex][0].transcript
+        message:message ? message +" " + e.results[e.resultIndex][0].transcript : e.results[e.resultIndex][0].transcript
     })
 }
     return (

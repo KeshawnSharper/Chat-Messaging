@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react"
 import firebase from 'firebase/app';
 import VoiceText from "./VoiceText"
-const Channel = () => {
+const Channel = ({friend = null,user = null}) => {
     const [messages,setMessages] = useState([])
     const [message,setMessage] = useState({
         message:null,
@@ -32,6 +32,8 @@ const handleChange = e => {
 const submit = e => {
     if (db){
         db.collection("messages").add({
+          from_id:user.additionalUserInfo.profile.id,
+          user_id:friend.id,
             message:message.message,
             date:firebase.firestore.FieldValue.serverTimestamp()
         })
@@ -39,21 +41,24 @@ const submit = e => {
         
     
 }
+console.log(user)
     return (
         <>
              <div className="chat">
     <div className="chat-header clearfix">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+      <img src={friend.avatar_url} alt="avatar" />
       <div className="chat-about">
-        <div className="chat-with">Chat with Vincent Porter</div>
+        <div className="chat-with">Chat with {friend.login}</div>
         <div className="chat-num-messages">already 1 902 messages</div>
       </div>
       <i className="fa fa-star" />
     </div> {/* end chat-header */}
     <div className="chat-history">
       <ul>
-          {messages.map(message => (
-            <li className="clearfix">
+          {messages.filter(message => (
+            message.from_id === friend.id || message.from_id === user.additionalUserInfo.profile.id && message.user_id === user.additionalUserInfo.profile.id || message.user_id === friend.id
+          )).map(message => (
+            <li className="clearfix" >
           <div className="message-data align-right">
             <span className="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
             <span className="message-data-name">Olia</span> <i className="fa fa-circle me" />

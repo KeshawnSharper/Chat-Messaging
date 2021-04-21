@@ -8,7 +8,16 @@ $gray: #92959E;
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
+img {
+  height: 55px;
+  width:55px;
+  border-radius: 50%;
+}
+.signin-btn{
+  position: absolute;
+  top:40%;
+  left:500px
+}
 body {
   background: #C5DDEB;
   font: 14px/20px "Lato", Arial, sans-serif;
@@ -58,14 +67,10 @@ body {
       list-style-type: none;
     }
   }
-  .img-container{
+
    
-    img {
-      height: 55px;
-      width:55px;
-      border-radius: 50%;
-    }
-  }
+  
+  
   
   
   .about {

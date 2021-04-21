@@ -5,9 +5,12 @@ const Friends = ({user}) => {
 const [searchValue,setSearchValue] = useState("")
 const [friends,setFriends] = useState([])
 const [results,setResults] = useState([])
+const [friend,setFriend] = useState(null)
 useEffect(() => {
-    axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/followers`).then(res =>
+    axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/followers`).then(res => {
     setFriends(res.data)
+    setFriend(res.data.length > 0 ? res.data[0] : null)
+}
     )
 },[])
 const handleChange = e => {
@@ -15,6 +18,10 @@ const handleChange = e => {
     setResults(res.data.items)
   ))
 setSearchValue(e.target.value)
+}
+console.log(friends)
+const changeFriend = user => {
+  setFriend(user)
 }
 return (
     <div className="container clearfix">
@@ -28,7 +35,7 @@ return (
         {searchValue === ""
         ?
             friends.map(user => (
-                <li className="clearfix">
+                <li className="clearfix" style={{cursor:"pointer"}} onClick={() => changeFriend(user)}>
                     <div className="img-container">
                 <img src={user.avatar_url} alt="avatar" />
                 </div>
@@ -60,7 +67,14 @@ return (
  
     </ul>
   </div>
- <Channel  />
+  {
+    friend ?
+    <>
+ <Channel  friend={friend} user={user}/>
+</>
+    :
+    null
+  }
 </div> 
 )
 }
