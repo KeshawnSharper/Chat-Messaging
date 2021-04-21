@@ -6,13 +6,21 @@ const [searchValue,setSearchValue] = useState("")
 const [friends,setFriends] = useState([])
 const [results,setResults] = useState([])
 const [friend,setFriend] = useState(null)
+const [friendObj,setFriendObj] = useState({})
 useEffect(() => {
     axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/followers`).then(res => {
+    res.data.map(obj => (
+      friendObj[obj.id]=0
+    ))
+    console.log(res.data)
     setFriends(res.data)
     setFriend(res.data.length > 0 ? res.data[0] : null)
 }
     )
     axios.get(`https://api.github.com/users/${user.additionalUserInfo.username}/following`).then(res => {
+      res.data.map(obj => (
+        friendObj[obj.id]=0
+      ))
     setFriends(res.data.length > 0 ? [...friends,res.data[0]] : friends)
 }
     )
@@ -27,6 +35,7 @@ console.log(friends)
 const changeFriend = user => {
   setFriend(user)
 }
+console.log(friendObj)
 return (
     <div className="container clearfix">
       
