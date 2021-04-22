@@ -35,7 +35,16 @@ console.log(friends)
 const changeFriend = user => {
   setFriend(user)
 }
-console.log(friendObj)
+const followUser = follower => {
+  if ( friendObj[follower.id] !== 0){
+    friendObj[follower.id] = 0
+    axios.put(`https://api.github.com/users/${user.additionalUserInfo.username}/following`,{
+      'username':follower.login
+    })
+    .then(res => console.log(res))
+    setFriends([...friends,follower])
+  }
+}
 return (
     <div className="container clearfix">
       
@@ -83,7 +92,7 @@ return (
   {
     friend ?
     <>
- <Channel  friend={friend} user={user}/>
+ <Channel  friend={friend} user={user} followUser={followUser}/>
 </>
     :
     null

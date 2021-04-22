@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react"
 import firebase from 'firebase/app';
 import VoiceText from "./VoiceText"
-const Channel = ({friend = null,user = null}) => {
+const Channel = ({friend = null,user = null,followUser = null}) => {
     const [messages,setMessages] = useState([])
     const [message,setMessage] = useState({
         message:null,
@@ -30,6 +30,7 @@ const handleChange = e => {
     })
 }
 const submit = e => {
+  followUser(friend)
     if (db){
         db.collection("messages").add({
           from_id:user.additionalUserInfo.profile.id,
